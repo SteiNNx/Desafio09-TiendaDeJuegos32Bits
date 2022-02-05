@@ -8,6 +8,7 @@
           <th scope="col">Nombre</th>
           <th scope="col">Stock Disponible</th>
           <th scope="col">Precio</th>
+          <th v-if="cantSell" scope="col">Vender</th>
         </tr>
       </thead>
       <tbody>
@@ -21,6 +22,15 @@
           <td>{{ juego.nombre }}</td>
           <td>{{ juego.stock }}</td>
           <td>{{ juego.precio }}</td>
+          <th v-if="cantSell" scope="col">
+            <button
+              id="btn-sell-product"
+              class="btn btn-dark"
+              @click="sellOneItemProduct(index)"
+            >
+              Vender
+            </button>
+          </th>
         </tr>
       </tbody>
     </table>
@@ -28,6 +38,8 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "ListGames",
   props: {
@@ -37,8 +49,15 @@ export default {
         return [];
       },
     },
+    cantSell: {
+      type: Boolean,
+      default() {
+        return false;
+      },
+    },
   },
   methods: {
+    ...mapActions(["sellOneItemProduct"]),
     getBgColor(color) {
       switch (color) {
         case "red":
