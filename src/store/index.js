@@ -18,14 +18,13 @@ export default new Vuex.Store({
   actions: {
   },
   getters: {
-    getJuegosRegistrados: (state) => {
-      return state.juegos.length;
+    getJuegosRegistrados: ({ juegos }) => {
+      return juegos.length;
     },
-    getStockTotal: (state) => {
-      return state.juegos.reduce(((previusValue, currentValue) => previusValue + currentValue.stock), 0);
+    getStockTotal: ({ juegos }) => {
+      return juegos.reduce(((previusValue, currentValue) => previusValue + currentValue.stock), 0);
     },
-    getJuegosByFilter(state) {
-      const { juegos, filtro } = state;
+    getJuegosByFilter: ({ juegos, filtro }) => {
       return juegos.filter((juego) => {
         for (const word of filtro) {
           if (juego.codigo.indexOf(word) === -1) {
@@ -34,6 +33,9 @@ export default new Vuex.Store({
         }
         return true;
       });
+    },
+    getCountJuegosStock: ({ juegos }) => {
+
     }
   },
 })

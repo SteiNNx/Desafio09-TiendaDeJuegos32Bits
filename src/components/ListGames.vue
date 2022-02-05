@@ -11,13 +11,16 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(juego, index) in juegos" :key="index">
+        <tr
+          v-for="(juego, index) in juegos"
+          :key="index"
+          :class="getBgColor(juego.color)"
+        >
           <th scope="row">{{ index + 1 }}</th>
           <td>{{ juego.codigo }}</td>
           <td>{{ juego.nombre }}</td>
           <td>{{ juego.stock }}</td>
           <td>{{ juego.precio }}</td>
-          <td>{{ juego.color }}</td>
         </tr>
       </tbody>
     </table>
@@ -33,6 +36,22 @@ export default {
       default() {
         return [];
       },
+    },
+  },
+  methods: {
+    getBgColor(color) {
+      switch (color) {
+        case "red":
+          return "bg-danger";
+        case "blue":
+          return "bg-primary";
+        case "green":
+          return "bg-success";
+        case "yellow":
+          return "bg-warning";
+        default:
+          return "bg-info";
+      }
     },
   },
 };
