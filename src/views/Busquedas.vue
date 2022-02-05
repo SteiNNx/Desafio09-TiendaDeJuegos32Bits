@@ -1,7 +1,6 @@
 <template>
   <div>
     <h1>Busqueda de Juegos</h1>
-
     <section>
       <div class="input-group mb-3">
         <span class="input-group-text" id="formFiltroArial">Filtro</span>
@@ -16,9 +15,9 @@
     </section>
     <section>
       <div class="input-group mb-3">
-        <span class="input-group-text" id="formCantJuegosRegis"
-          >Cantidad de Juegos Registrados</span
-        >
+        <span class="input-group-text" id="formCantJuegosRegis">
+          Cantidad de Juegos Registrados
+        </span>
         <input
           type="text"
           class="form-control"
@@ -38,22 +37,34 @@
         />
       </div>
     </section>
-    <section></section>
+    <section>
+      <ListGames :juegos="getJuegosByFilter" />
+    </section>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
+import ListGames from "@/components/ListGames";
 
 export default {
   name: "Busquedas",
-  data() {
-    return {
-      filtro: "",
-    };
-  },
+  components: { ListGames },
   computed: {
-    ...mapGetters(["getJuegosRegistrados", "getStockTotal"]),
+    ...mapState(["filtro"]),
+    ...mapGetters(["getJuegosRegistrados", "getStockTotal", "getJuegosByFilter"]),
+    /**
+     * @description Two-way Computed Property
+     * @link https://vuex.vuejs.org/guide/forms.html#two-way-computed-property
+     */
+    filtro: {
+      get() {
+        return this.$store.state.filtro;
+      },
+      set(value) {
+        this.$store.commit("SET_FILTRO", value);
+      },
+    },
   },
 };
 </script>
