@@ -42,6 +42,7 @@ export default new Vuex.Store({
             codigo: juego.codigo,
             nombre: juego.nombre,
             precio: juego.precio,
+            hora_venta: new Date().toLocaleString(),
           };
           const ventas = [...state.ventas];
           ventas.push(venta);
@@ -77,5 +78,8 @@ export default new Vuex.Store({
       return juegos
         .filter((juego) => juego.stock > 0);
     },
+    getTotalAmount: ({ ventas }) => {
+      return ventas.reduce(((previusValue, currentValue) => previusValue + currentValue.precio), 0);
+    }
   },
 })

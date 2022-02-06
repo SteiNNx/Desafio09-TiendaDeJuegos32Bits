@@ -7,7 +7,7 @@
         <input
           type="text"
           class="form-control"
-          placeholder="ingrese filtro"
+          placeholder="Ingrese filtro"
           v-model="filtro"
           aria-describedby="formFiltroArial"
         />

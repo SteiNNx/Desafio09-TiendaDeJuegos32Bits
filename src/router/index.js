@@ -3,8 +3,9 @@ import VueRouter from 'vue-router'
 
 import Inicio from "@/views/Inicio";
 import Busquedas from "@/views/Busquedas";
+import NotFound from "@/views/NotFound";
+import Total from "@/views/Total";
 import Ventas from "@/views/Ventas";
-//import Inicio from "@/views/Inicio";
 
 Vue.use(VueRouter)
 
@@ -14,6 +15,11 @@ const routes = [
     name: "Inicio",
     component: Inicio,
     alias: ["/home"],
+  },
+  {
+    path: '*',
+    name: "NotFound",
+    component: NotFound,
   },
   {
     path: '/busquedas',
@@ -26,6 +32,12 @@ const routes = [
     name: "Ventas",
     component: Ventas,
     alias: ["/vender"],
+  },
+  {
+    path: '/total',
+    name: "Total",
+    component: Total,
+    alias: ["/totales"],
   },
 ];
 
